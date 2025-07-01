@@ -1,0 +1,45 @@
+<h1>hello this is signUp page!!!</h1>
+
+
+<div id="contact" class="contact">   
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 ">
+                <form class="main_form " method='POST'>
+                    {% csrf_token %}
+
+                    <div class="row">
+                        <div class="col-md-12 ">
+                            <input class="form_contril" placeholder="Username " type="text" name="username">
+                            
+                            {% for err in form.username.errors %}
+                                <small class='text-danger'>{{err}}</small>
+                            {% endfor %}
+                            
+                        </div>
+                        <div class="col-md-12 ">
+                            <input class="form_contril" placeholder="Password " type="password" name="password1">
+                            
+                            {% for err in form.password1.errors %}
+                                <small class='text-danger'>{{err}}</small>
+                            {% endfor %}
+                            
+                        </div>
+                        <div class="col-md-12 ">
+                            <input class="form_contril" placeholder="Repeat Password " type="password" name="password2">
+                            
+                            {% for err in form.password2.errors %}
+                                <small class='text-danger'>{{err}}</small>
+                            {% endfor %}
+                            
+                        </div>
+                        
+                        <div class="col-sm-12">
+                            <button class="send_btn">SignUp</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
