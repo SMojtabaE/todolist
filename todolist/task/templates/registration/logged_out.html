@@ -1,0 +1,16 @@
+{% extends "posts/base.html" %}
+{% load static %}
+
+{% block content %}
+
+
+<div class=" col-xl-8 col-lg-8 col-md-8 col-12-9">
+    <div class="text-bg">
+       <h1><span class="white1">Loged out</span></h1>
+       <p>You have loged out sucssusfully!!<br>
+           to Login again press bellow botton. </p>
+       <a href=' {% url "login" %} '>Login</a>
+    </div>
+ </div>
+
+{% endblock content %}

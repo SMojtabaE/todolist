@@ -1,0 +1,36 @@
+{% extends "task/base.html" %}
+{% load static %}
+
+
+{% block content %}
+
+{% if task.user != user %}      {% comment %} checks if the user is the same one that made the post {% endcomment %}
+    
+    <p class="error"> You dont have permission for this page</p>
+{% else %}
+        <div class='card-container'>
+            
+                <div class='card'>
+                    <div class='card-content'>
+                        <article>
+                        <h3>{{task.title}}</h3>
+                        <h4>Time Posted : {{task.date_created}}</h4>
+                        <p>{{task.text}}</p>
+                        {% comment %} <p>{{task.text|truncatewords:25}}</p> {% endcomment %}
+                        {% comment %} <a href='/public_post_detail/{{post.id}}' class='post-btn'>Read More</a> {% endcomment %}
+                        </article>
+                    </div>
+                </div>
+            
+            
+
+        </div>
+
+        <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+        </form>
+
+{% endif %}
+
+{% endblock content %}

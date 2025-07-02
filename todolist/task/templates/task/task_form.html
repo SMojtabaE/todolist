@@ -1,0 +1,38 @@
+{% extends "task/base.html" %}
+{% load static %}
+
+
+{% block content %}
+<div id="contact" class="contact">   
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 ">
+                <form class="main_form " method='POST'>
+                    {% csrf_token %}
+
+                    <div class="row">
+                        <div class="col-md-12 ">
+                            <input class="form_contril" placeholder="Title " type="text" name="title" value="{% if form.title.value %} {{ form.title.value }} {% else %}{% endif %}">
+                            
+                            {% for err in form.title.errors %}
+                                <small class='text-danger'>{{err}}</small>
+                            {% endfor %}
+                            
+                        </div>
+                        <div class="col-md-12">
+                            <textarea class="textarea" placeholder="Text" type="text" name="text">{% if form.text.value %}{{ form.text.value }}{% endif %}</textarea>
+                            
+                            {% for err in form.content.errors %}
+                                <small class='text-danger'>{{err}}</small>
+                            {% endfor %}
+                        </div>
+                        <div class="col-sm-12">
+                            <button class="send_btn">Post</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,67 @@
+{% extends "task/base.html" %}
+{% load static %}
+
+{% block content %}
+
+{% if form.errors %}
+    <p class="error">Your username or password was incorrect,try again.</p>
+    
+{% endif %}
+
+{% if next %}
+    {% if user.is_authenticated %}
+        <p class="error"> You dont have permission for this page</p>
+    {% else %}
+        <p class="error">Pelase login to see this page</p>
+    {% endif %}
+{% endif %} 
+
+<div class="login-bg">
+    <div class="wrapper mx-auto ">
+        
+        {% comment %} <form class="main_form " method="POST" action="{% url 'login' %}">
+            {% csrf_token %}
+            <h1>Log In</h1>
+            <div class="row ">
+
+                <div class="input-box">
+                    <label class="form-label">Username</label>
+                    
+                    <input type="text" class="form-control" placeholder="Username " name="username">
+
+                    {% for err in form.username.errors %}
+                        <small class='text-danger'>{{err}}</small>
+                    {% endfor %} 
+                    
+                </div>
+                <div class="input-box">
+                    <label class="form-label">Password</label>
+                    <input class="form-control" placeholder="Password " type="password" name="password1">
+                    
+                    {% for err in form.password1.errors %}
+                        <small class='text-danger'>{{err}}</small>
+                    {% endfor %}
+                    
+                </div>
+                
+                <div class='register-link'>
+                    <p>Dont have an account?<a href='{% url "task:signup" %}'>SignUp</a></p>
+                </div>
+
+                <div class="col-sm-12">
+                    <button class="btn btn-primary" type="submit">Login</button>
+                    <input type='hidden' name='next' value='{{ next }}'>
+                </div>
+            </div>
+        </form>  {% endcomment %}
+
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Login</button>
+        </form>
+        
+    </div>
+</div>
+
+{% endblock content %}
