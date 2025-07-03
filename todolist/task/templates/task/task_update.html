@@ -1,0 +1,51 @@
+{% extends "task/base.html" %}
+{% load static %}
+
+
+{% block content %}
+
+{% if task.user != user %}      {% comment %} checks if the user is the same one that made the post {% endcomment %}
+    
+    <p class="error"> You dont have permission for this page</p>
+{% else %}
+
+<div id="contact" class="contact">   
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 ">
+                <form class="main_form " method='POST'>
+                    {% csrf_token %}
+
+                    <div class="row">
+                        <div class="col-md-12 ">
+                            <input class="form_contril" placeholder="Title " type="text" name="title" value="{{ form.title.value }}">
+                            
+                            {% comment %} {% for err in form.title.errors %}
+                                <small class='text-danger'>{{err}}</small>
+                            {% endfor %} {% endcomment %}
+                            
+                        </div>
+                        <div class="col-md-12">
+                            <textarea class="textarea" placeholder="Text" type="text" name="text">{{ form.text.value }}</textarea>
+                            
+                        </div>
+
+                        <div class='form-checkbox'>
+                            <label for="is_active" class='form-checkbox-label'> is active?</label>
+                            <input type="checkbox" id="is_active" name="is_active" {% if form.is_active.value %}checked{% endif %} />
+                            
+                        </div>
+                
+
+
+                        <div class="col-sm-12">
+                            <button class="send_btn">Save</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock content %}

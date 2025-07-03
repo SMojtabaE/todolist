@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView, DetailView
+from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 from .models import Task
 from django.contrib.auth.mixins import LoginRequiredMixin 
         
@@ -35,3 +35,15 @@ class HomeTaskListView(LoginRequiredMixin,ListView):   #home page           # te
 
 class TaskDetailview(LoginRequiredMixin,DetailView):           # tempalte = > task_detail.html
     model = Task
+
+
+class TaskUpdateView(LoginRequiredMixin,UpdateView):          
+    model = Task
+    template_name = 'task/task_update.html'
+    fields = ['title', 'text','is_active']
+    success_url = reverse_lazy('task:home')
+
+class TaskDeleteView(LoginRequiredMixin,DeleteView):
+    model = Task
+    template_name = 'task/task_confirm_delete.html'
+    success_url = reverse_lazy('task:home')

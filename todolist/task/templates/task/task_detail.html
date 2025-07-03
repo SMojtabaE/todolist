@@ -12,13 +12,23 @@
             
                 <div class='card'>
                     <div class='card-content'>
-                        <article>
-                        <h3>{{task.title}}</h3>
-                        <h4>Time Posted : {{task.date_created}}</h4>
-                        <p>{{task.text}}</p>
-                        {% comment %} <p>{{task.text|truncatewords:25}}</p> {% endcomment %}
-                        {% comment %} <a href='/public_post_detail/{{post.id}}' class='post-btn'>Read More</a> {% endcomment %}
+                            <article>
+                            <h3>{{task.title}}</h3>
+                            <h4>Time Posted : {{task.date_created}}</h4>
+                            <p>{{task.text}}</p>
+
+                            <div class='form-checkbox'>
+                                <label for="is_active" class='form-checkbox-label'> is active?</label>
+                                <input type="checkbox" id="is_active" name="is_active" {% if task.is_active %}checked{% endif %} disabled />
+                                
+                            </div>
+
+            
                         </article>
+                        <div class='post-btns'>
+                            <a  href='/update_task/{{task.id}}'><button class='post-btn'>Update</button></a>
+                            <a  href='/delete_task/{{task.id}}'><button class='post-btn-delete'>Delete</button></a>
+                         </div>
                     </div>
                 </div>
             
