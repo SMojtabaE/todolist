@@ -3,29 +3,68 @@
 
 
 {% block content %}
+<div class="top">
+<div class="wrapper">
+      <form method="GET">
+         <label for="is_done">Filter by Status:</label>
+         <select name="status" id="status">
+            <option value="">All</option>
+            <option value="pending">Pending</option>
+            <option value="completed">Completed</option>
+         </select>
 
-<div class='card-container'>
-    {% for task in task_list %}
-       
-          <div class='card'>
-             <div class='card-content'>
-                <article>
-                   <h3>{{task.title}}</h3>
-                   <h4>Time Posted : {{task.date_created}}</h4>
-                   {% comment %} <p>{{task.text}}</p> {% endcomment %}
-                   {% comment %} <p>{{task.text|truncatewords:25}}</p> {% endcomment %}
-                   <a href='/detail_task/{{task.id}}' class='post-btn'>Read More</a>
-                </article>
-             </div>
-          </div>
-       
-    {% endfor %}
+         <button type="submit">Apply Filter</button>
+      </form>
 
- </div>
+      {% comment %} <div class='card-container'>
+         {% for task in task_list %} {% endcomment %}
+            
+               {% comment %} <div class='card'>
+                  <div class='card-content'>
+                     <article>
+                        <h3>{{task.title}}</h3>
+                        <h4>Time Posted : {{task.date_created}}</h4>
+                        
+                        <a href='/detail_task/{{task.id}}' class='post-btn'>Read More</a>
+                     </article>
+                  </div>
+               </div> {% endcomment %}
 
- <form action="{% url 'logout' %}" method="post">
-   {% csrf_token %}
-   <button type="submit">Logout</button>
-</form>
+               {% comment %} <div class="row">
+                  <div class="col-sm-6 mb-3 mb-sm-0">
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title">{{task.title}}</h5>
+                        <p class="card-text">{{task.text|truncatewords:10}}</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card text-bg-info mb-3" style="max-width: 18rem;">
+                     <div class="card-header">Header</div>
+                     <div class="card-body">
+                       <h5 class="card-title">{{task.title}}</h5>
+                       <p class="card-text">{{task.text|truncatewords:10}}</p>
+                     </div>
+                   </div>
+            
+         {% endfor %}
 
+      </div> {% endcomment %}
+
+      <div class="todo-list-card card">
+      
+         <div class="card-section">
+            {% for task in task_list %}
+               <ul>
+                  <li>
+                     <label for="item1"></label>{{task.title}}
+                     <a href='/detail_task/{{task.id}}' class='post-btn'>Read More</a>
+                  </li>
+               </ul>
+            {% endfor %}   
+         </div>
+       </div> 
+   </div>
+</div>
 {% endblock content %}

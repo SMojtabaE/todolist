@@ -27,10 +27,23 @@ class TaskCreateview(LoginRequiredMixin,CreateView):           # templat = > tas
 class HomeTaskListView(LoginRequiredMixin,ListView):   #home page           # template = > index.html
     model = Task
     template_name = 'task/index.html'
-
+    paginate_by = 5
     context_object_name = 'task_list'
     def get_queryset(self):
-        return Task.objects.filter(user=self.request.user)
+
+        queryset = Task.objects.filter(user=self.request.user)  # Start with the default queryset
+        status_filter = self.request.GET.get('status')
+        print(status_filter)
+        # /?status=completed
+        # ?status=pending
+        if status_filter:
+            if status_filter=='completed':
+                queryset = queryset.filter(user=self.request.user, is_done=True)
+            elif status_filter=='pending':
+                queryset = queryset.filter(user=self.request.user, is_done=False)
+
+
+        return queryset
 
 
 class TaskDetailview(LoginRequiredMixin,DetailView):           # tempalte = > task_detail.html
@@ -40,7 +53,7 @@ class TaskDetailview(LoginRequiredMixin,DetailView):           # tempalte = > ta
 class TaskUpdateView(LoginRequiredMixin,UpdateView):          
     model = Task
     template_name = 'task/task_update.html'
-    fields = ['title', 'text','is_active']
+    fields = ['title', 'text','is_done']
     success_url = reverse_lazy('task:home')
 
 class TaskDeleteView(LoginRequiredMixin,DeleteView):

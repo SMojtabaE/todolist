@@ -8,6 +8,7 @@
     
     <p class="error"> You dont have permission for this page</p>
 {% else %}
+<div class="top">
         <div class='card-container'>
             
                 <div class='card'>
@@ -18,8 +19,8 @@
                             <p>{{task.text}}</p>
 
                             <div class='form-checkbox'>
-                                <label for="is_active" class='form-checkbox-label'> is active?</label>
-                                <input type="checkbox" id="is_active" name="is_active" {% if task.is_active %}checked{% endif %} disabled />
+                                <label for="is_done" class='form-checkbox-label'> is done?</label>
+                                <input type="checkbox" id="is_done" name="is_done" {% if task.is_done %}checked{% endif %} disabled />
                                 
                             </div>
 
@@ -40,7 +41,7 @@
         {% csrf_token %}
         <button type="submit">Logout</button>
         </form>
-
+    </div>
 {% endif %}
 
 {% endblock content %}

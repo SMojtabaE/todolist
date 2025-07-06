@@ -9,20 +9,21 @@
     <p class="error"> You dont have permission for this page</p>
 {% else %}
 
-
-<div class='card-content'>
-    <form method='POST'>
-        {% csrf_token %}
-       <h3>Are you sure you want to delete this task?</h3>
-       <hr style="background:#046c58;">
-       <h4>Title : <b><i>{{task.title}}</i></b></h4>  
-    
-        <div class='post-btns'>
-            <input class='post-btn-delete' type='submit' value='delete'>
-            
-        </div>
-    </form>
- </div>
+<div class="top">
+    <div class='card-content'>
+        <form method='POST'>
+            {% csrf_token %}
+        <h3>Are you sure you want to delete this task?</h3>
+        <hr style="background:#046c58;">
+        <h4>Title : <b><i>{{task.title}}</i></b></h4>  
+        
+            <div class='post-btns'>
+                <input class='post-btn-delete' type='submit' value='delete'>
+                
+            </div>
+        </form>
+    </div>
+</div>
 
 {% endif %}
 {% endblock content %}
