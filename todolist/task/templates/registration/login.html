@@ -4,21 +4,20 @@
 {% block content %}
 
 {% if form.errors %}
-    <p class="error">Your username or password was incorrect,try again.</p>
+    <p class="p-3 mb-2 bg-danger text-white">Your username or password was incorrect,try again.</p>
     
 {% endif %}
 
 {% if next %}
     {% if user.is_authenticated %}
-        <p class="error"> You dont have permission for this page</p>
+        <p class="p-3 mb-2 bg-danger text-white"> You dont have permission for this page</p>
     {% else %}
-        <p class="error">Pelase login to see this page</p>
+        <p class="p-3 mb-2 bg-danger text-white">Pelase login to see this page</p>
     {% endif %}
 {% endif %} 
 
 <div class="top">
     <div class="wrapper mx-auto ">
-        
         {% comment %} <form class="main_form " method="POST" action="{% url 'login' %}">
             {% csrf_token %}
             <h1>Log In</h1>
@@ -48,7 +47,7 @@
                     <p>Dont have an account?<a href='{% url "task:signup" %}'>SignUp</a></p>
                 </div>
 
-                <div class="col-sm-12">
+                <div class="col-sm-12 ">
                     <button class="btn btn-primary" type="submit">Login</button>
                     <input type='hidden' name='next' value='{{ next }}'>
                 </div>

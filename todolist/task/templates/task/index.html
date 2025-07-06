@@ -65,6 +65,25 @@
             {% endfor %}   
          </div>
        </div> 
+       
+
+      <nav aria-label="...">
+         <ul class="pagination">
+         <li class="page-item"><a href="#" class="page-link">Previous</a></li>
+         <li class="page-item"><a class="page-link" href="#">1</a></li>
+         <li class="page-item active">
+            <a class="page-link" href="#" aria-current="page">2</a>
+         </li>
+         <li class="page-item"><a class="page-link" href="#">3</a></li>
+         {% if page_obj.has_next %}
+         <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">next</a></li>
+         <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">last&raquo;</a></li>
+      {% endif %}
+         <li class="page-item"><a class="page-link" href="#">Next</a></li>
+         </ul>
+      </nav>
+ 
+ 
    </div>
 </div>
 {% endblock content %}
