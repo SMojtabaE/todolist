@@ -26,7 +26,7 @@
                <a class="nav-link active" aria-current="page" href=' {% url "task:create_task" %} '>Add task</a>
                </li>
                <li class="nav-item">
-               <a class="nav-link active" href=' {% url "task:home" %} '>List</a>
+               <a class="nav-link active" href=' {% url "task:list_task" %} '>List</a>
                </li>
                {% if user.is_authenticated %}
 

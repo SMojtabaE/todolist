@@ -3,103 +3,21 @@
 
 
 {% block content %}
-<div class="top">
-<div class="wrapper">
-      <form method="GET">
-         <label for="is_done">Filter by Status:</label>
-         <select name="status" id="status">
-            <option value="">All</option>
-            <option value="pending">Pending</option>
-            <option value="completed">Completed</option>
-         </select>
-
-         <button type="submit">Apply Filter</button>
-      </form>
-
-      {% comment %} <div class='card-container'>
-         {% for task in task_list %} {% endcomment %}
-            
-               {% comment %} <div class='card'>
-                  <div class='card-content'>
-                     <article>
-                        <h3>{{task.title}}</h3>
-                        <h4>Time Posted : {{task.date_created}}</h4>
-                        
-                        <a href='/detail_task/{{task.id}}' class='post-btn'>Read More</a>
-                     </article>
-                  </div>
-               </div> {% endcomment %}
-
-               {% comment %} <div class="row">
-                  <div class="col-sm-6 mb-3 mb-sm-0">
-                    <div class="card">
-                      <div class="card-body">
-                        <h5 class="card-title">{{task.title}}</h5>
-                        <p class="card-text">{{task.text|truncatewords:10}}</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card text-bg-info mb-3" style="max-width: 18rem;">
-                     <div class="card-header">Header</div>
-                     <div class="card-body">
-                       <h5 class="card-title">{{task.title}}</h5>
-                       <p class="card-text">{{task.text|truncatewords:10}}</p>
-                     </div>
-                   </div>
-            
-         {% endfor %}
-
-      </div> {% endcomment %}
-
-      {% comment %} <div class="todo-list-card card">
-      
-         <div class="card-section">
-            
-               <ul>
-                  {% for task in task_list %}
-                     <li>
-                        <label for="item1">{{task.title}}</label>
-                        <a href='/detail_task/{{task.id}}' class='post-btn'>Read More</a>
-                     </li>
-                  {% endfor %}
-               </ul>
-               
-         </div>
-       </div>  {% endcomment %}
-
-       <div class="card" style="width: 18rem;">
-         
-         <ul class="list-group list-group-flush">
-            {% for task in task_list %}
-            <li class="list-group-item"><a href='/detail_task/{{task.id}}' class='post-btn'>{{task.title}}</a></li>
-           {% endfor %}
-         </ul>
-       </div>
-       
-
-      <nav aria-label="...">
-         <ul class="pagination">
-            {% if page_obj.has_previous %}
-               <li class="page-item"><a class="page-link" href="?page=1">&laquo;first</a></li>
-               <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">previous</a></li>
-               <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a></li>
-            {% endif %}
-         
-         
-         <li class="page-item active">
-            <a class="page-link" href="#" aria-current="page">{{ page_obj.number }}</a>
-         </li>
-         
-         {% if page_obj.has_next %}
-         <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a></li>
-         <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">next</a></li>
-         <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">last&raquo;</a></li>
-         {% endif %}
-         </ul>
-      </nav>
- 
- 
-   </div>
+<div class="top-home">
+    <h1>ToDo List Manager</h1>
+    <h2>Let's Start</h2>
+    
+    {% if user.is_authenticated %}
+    <div class="buttons">
+      <a  href=' {% url "task:list_task" %} '><button class="btn btn-primary">Task List</button></a>
+   </div>    
+ {% else %}
+ <div class="buttons">
+   <a  href=' {% url "login" %} '><button class="btn btn-primary">Login</button></a>
+       <a  href=' {% url "task:signup" %} '><button class="btn btn-primary">Signin</button></a>
+</div>
+                     
+ {% endif %}
+    
 </div>
 {% endblock content %}

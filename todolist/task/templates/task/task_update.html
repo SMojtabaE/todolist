@@ -14,15 +14,7 @@
                         {% csrf_token %}
                         <h1>Edit Task</h1>
                         <div class="row">
-                            {% comment %} <div class="col-md-12 ">
-                                <input class="form_contril" placeholder="Title " type="text" name="title" value="{{ form.title.value }}">
-                                
-                                {% comment %} {% for err in form.title.errors %}
-                                    <small class='text-danger'>{{err}}</small>
-                                {% endfor %} 
-                                
-                            </div> {% endcomment %}
-
+                            
                             <div class="input-box ">
                                 <label class="form-label">Title</label>
                                 <input class="form_control" placeholder="Title " type="text" name="title" value="{{ form.title.value }}">
@@ -30,11 +22,6 @@
                                     <small class='text-danger'>{{err}}</small>
                                 {% endfor %}
                             </div>
-
-                            {% comment %} <div class="col-md-12">
-                                <textarea class="textarea" placeholder="Text" type="text" name="text">{{ form.text.value }}</textarea>
-                                
-                            </div> {% endcomment %}
 
                             <div class="input-box">
                                 <label class="form-label">Text</label>
@@ -55,7 +42,7 @@
 
 
                             <div class="col-sm-12">
-                                <button class="btn btn-primary">Save</button>
+                                <button class="btn btn-primary post-btn">Save</button>
                             </div>
                         </div>
                     </form>

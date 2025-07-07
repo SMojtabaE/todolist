@@ -1,0 +1,55 @@
+{% extends "task/base.html" %}
+{% load static %}
+
+
+{% block content %}
+<div class="top">
+   <div class="wrapper">
+      <div class="row">
+         <h1>List Of Tasks</h1>
+         <form method="GET">
+            <label for="is_done">Filter by Status:</label>
+            <select name="status" id="status">
+               <option value="">All</option>
+               <option value="pending">Pending</option>
+               <option value="completed">Completed</option>
+            </select>
+
+            <button class='btn-primary' type="submit">Apply Filter</button>
+         </form>
+
+         <div class="card" style="width: 18rem;">
+            
+            <ul class="list-group list-group-flush">
+               {% for task in task_list %}
+               <li class="list-group-item"><a href='/detail_task/{{task.id}}' class='post-btn'>{{task.title}}</a></li>
+            {% endfor %}
+            </ul>
+         </div>
+         
+
+         <nav aria-label="...">
+            <ul class="pagination">
+               {% if page_obj.has_previous %}
+                  <li class="page-item"><a class="page-link" href="?page=1">&laquo;first</a></li>
+                  <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">previous</a></li>
+                  <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a></li>
+               {% endif %}
+            
+            
+            <li class="page-item active">
+               <a class="page-link" href="#" aria-current="page">{{ page_obj.number }}</a>
+            </li>
+            
+            {% if page_obj.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">next</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">last&raquo;</a></li>
+            {% endif %}
+            </ul>
+         </nav>
+ 
+      </div>
+   </div>
+</div>
+{% endblock content %}
