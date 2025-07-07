@@ -52,19 +52,30 @@
 
       </div> {% endcomment %}
 
-      <div class="todo-list-card card">
+      {% comment %} <div class="todo-list-card card">
       
          <div class="card-section">
-            {% for task in task_list %}
+            
                <ul>
-                  <li>
-                     <label for="item1"></label>{{task.title}}
-                     <a href='/detail_task/{{task.id}}' class='post-btn'>Read More</a>
-                  </li>
+                  {% for task in task_list %}
+                     <li>
+                        <label for="item1">{{task.title}}</label>
+                        <a href='/detail_task/{{task.id}}' class='post-btn'>Read More</a>
+                     </li>
+                  {% endfor %}
                </ul>
-            {% endfor %}   
+               
          </div>
-       </div> 
+       </div>  {% endcomment %}
+
+       <div class="card" style="width: 18rem;">
+         
+         <ul class="list-group list-group-flush">
+            {% for task in task_list %}
+            <li class="list-group-item"><a href='/detail_task/{{task.id}}' class='post-btn'>{{task.title}}</a></li>
+           {% endfor %}
+         </ul>
+       </div>
        
 
       <nav aria-label="...">

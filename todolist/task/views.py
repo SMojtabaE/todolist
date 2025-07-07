@@ -27,7 +27,7 @@ class TaskCreateview(LoginRequiredMixin,CreateView):           # templat = > tas
 class HomeTaskListView(LoginRequiredMixin,ListView):   #home page           # template = > index.html
     model = Task
     template_name = 'task/index.html'
-    paginate_by = 5
+    paginate_by = 10
     context_object_name = 'task_list'
     def get_queryset(self):
 

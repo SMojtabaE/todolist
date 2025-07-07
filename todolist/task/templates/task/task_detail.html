@@ -6,14 +6,13 @@
 
 {% if task.user != user %}      {% comment %} checks if the user is the same one that made the post {% endcomment %}
     
-    <p class="error"> You dont have permission for this page</p>
+    <p class="p-3 mb-2 bg-danger text-white"> You dont have permission for this page</p>
 {% else %}
+
 <div class="top">
-        <div class='card-container'>
+        <div class='wrapper'>
             
-                <div class='card'>
-                    <div class='card-content'>
-                            <article>
+                            {% comment %} <article>
                             <h3>{{task.title}}</h3>
                             <h4>Time Posted : {{task.date_created}}</h4>
                             <p>{{task.text}}</p>
@@ -25,22 +24,40 @@
                             </div>
 
             
-                        </article>
-                        <div class='post-btns'>
-                            <a  href='/update_task/{{task.id}}'><button class='post-btn'>Update</button></a>
-                            <a  href='/delete_task/{{task.id}}'><button class='post-btn-delete'>Delete</button></a>
-                         </div>
-                    </div>
-                </div>
-            
-            
+                        </article> {% endcomment %}
+                        <div class="row">
+                            {% comment %} <div class="col-md-12 ">
+                                <input class="form_contril" placeholder="Title " type="text" name="title" value="{{ form.title.value }}">
+                                
+                                {% comment %} {% for err in form.title.errors %}
+                                    <small class='text-danger'>{{err}}</small>
+                                {% endfor %} 
+                                
+                            </div> {% endcomment %}
 
+                            <div class="input-box ">
+                                <label class="form-label">Title</label>
+                                <input class="form_control" placeholder="Title " type="text" name="title" value="{{task.title}}" disabled>
+                            </div>
+
+                            <div class="input-box">
+                                <label class="form-label">Text</label>
+                                <textarea class="textarea" placeholder="Text" type="text" name="text" disabled>{{task.text}}</textarea>
+                            </div>
+                            <div class="mycheckbox">
+                                <div class='register-link'>
+                                    <label for="is_done" class='form-checkbox-label'> is done?</label>
+                                    <input type="checkbox" id="is_done" name="is_done" {% if task.is_done %}checked{% endif %} disabled/>  
+                                </div>
+                            </div>
+                        <div class='btn-group btn-group-lg text-center' role="group">
+                            <a  href='/update_task/{{task.id}}'><button class='btn btn-primary up-btn btn-lg'>Update</button></a>
+                            <a  href='/delete_task/{{task.id}}'><button class='btn btn-danger up-btn btn-lg'>Delete</button></a>
+                            <a  href='{% url "task:home" %}'><button class='btn btn-success up-btn btn-lg'>Back</button></a>
+                         </div>            
         </div>
 
-        <form action="{% url 'logout' %}" method="post">
-        {% csrf_token %}
-        <button type="submit">Logout</button>
-        </form>
+        
     </div>
 {% endif %}
 
