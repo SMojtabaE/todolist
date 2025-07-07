@@ -7,8 +7,16 @@ from django.views.generic import (
                                 )
 from .models import Task
 from django.contrib.auth.mixins import LoginRequiredMixin 
-        
+
+from .serializers import TaskSerializer
+from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated
+from .permissions import IsOwner
 # Create your views here.
+
+
+
+
 
 class HomeView(TemplateView):
     template_name = 'task/index.html'
@@ -67,3 +75,28 @@ class TaskDeleteView(LoginRequiredMixin,DeleteView):
     model = Task
     template_name = 'task/task_confirm_delete.html'
     success_url = reverse_lazy('task:list_task')
+
+
+# API 
+
+class TaskApiList(generics.ListAPIView):
+    serializer_class = TaskSerializer
+    permission_classes = [IsAuthenticated, IsOwner]
+    def get_queryset(self):
+
+        queryset = Task.objects.filter(user=self.request.user)  
+        return queryset
+
+
+class TaskApiDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
+    permission_classes = [IsAuthenticated, IsOwner]
+
+
+class TaskCreateAPI(generics.CreateAPIView):
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
+    permission_classes = [IsAuthenticated]
+    def perform_create(self, serializer):
+            serializer.save(user=self.request.user)
