@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views.generic import ( 
@@ -46,11 +45,9 @@ class TaskListView(LoginRequiredMixin,ListView):
     context_object_name = 'task_list'
     def get_queryset(self):
 
-        queryset = Task.objects.filter(user=self.request.user)  # Start with the default queryset
+        queryset = Task.objects.filter(user=self.request.user)  
         status_filter = self.request.GET.get('status')
         print(status_filter)
-        # /?status=completed
-        # ?status=pending
         if status_filter:
             if status_filter=='completed':
                 queryset = queryset.filter(user=self.request.user, is_done=True)
